@@ -1,0 +1,6 @@
+aiohttp
+aiohttp-devtools
+aiohttp-jinja2
+aiohttp-session[secure]
+aioredis<2
+python-decouple

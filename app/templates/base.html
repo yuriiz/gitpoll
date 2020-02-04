@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitPoll</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+  </head>
+  <body>
+    <a target=_blank class=float-right href="https://github.com/yuriiz/gitpoll"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    <div class="grid-container">
+      <div class="grid-x grid-margin-x">
+        <div class="cell">
+          <br>
+          <h1><a href="/">GitPoll</a></h1>
+          <p>GitPoll service allows watching for changes in your GitHub repositories using HTTP long-polling. It can be used to keep destination repository always up-to-date without need to setup third-party continuous deployment tool or extra web service to receive webhooks.</p>
+          {% block content %}
+          {% if repos %}
+          <h3>Step 1</h3>
+          <input type=checkbox checked disabled> Login with GitHub
+          <h3>Step 2</h3>
+          {% if error %}
+          <div class='callout alert'>
+            Failed to setup webhook:
+            <pre>{{error|pprint}}</pre>
+          </div>
+          {% endif %}
+          <p>Select {% if error %}another{% endif %} repository to setup webhook:
+          <form method=post>
+            {% for r in repos %}
+            <input type=radio name=repo id={{r.id}} value="{{r.full_name}}">
+            <label for={{r.id}}><a
+                   target=_blank href="{{r.html_url}}">{{r.full_name}}</a></label>
+            <br>
+            {% endfor %}
+            <input class=button type=submit value=Next>
+          </form>
+          {% else %}
+          <h3>Step 1</h3>
+          <a class=button href="{{auth}}"><i class="fa fa-github"></i>
+            Login with GitHub</a>
+          <h3>Step 2</h3>
+          Select repository...
+          {% endif %}
+          <h3>Step 3</h3>
+          Watch for changes via long-polling...
+          <pre>#curl https://www.gitpoll.io/poll/... &amp;&amp; git pull</pre>
+          {% endblock %}
+          {% if repos %}
+          <br>
+          <a href="/logout">Log out</a><br>
+          <br>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <script src="https://use.fontawesome.com/dc9a7ffef0.js"></script>
+  </body>
+</html>

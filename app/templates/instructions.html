@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Step 1</h3>
+<input type=checkbox checked disabled> Login with GitHub
+<h3>Step 2</h3>
+<input type=checkbox checked disabled> Select repository to setup webhook.
+<h3>Step 3</h3>
+Watch for changes via long-polling.
+<p>Web-hook to GitPoll.io was setup.
+Use the following URL to poll for changes in repository "{{repo}}":<br>
+<a href="{{poll}}">{{poll}}</a></p>
+For example, continuously pulling new commits and restarting app (i.e. poor man's CI/CD):
+<pre class='callout secondary'>
+#!/bin/sh
+while true
+do
+        # wait for new changes with timeout of 1 hour
+        curl -m3600 {{poll}} \
+                || sleep 10    # throttle loop in case network goes down
+        # pull new changes
+        git pull
+        # place your application's test/rebuild/reload commands here
+        nosetests &amp;&amp; sudo service supervisord restart
+done
+</pre>
+<br>
+<a href="/">Setup another repo</a><br>
+<br>
+<a href="/logout">Log out</a><br>
+<br>
+{% endblock %}
