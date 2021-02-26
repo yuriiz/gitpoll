@@ -10,7 +10,7 @@ aiohttp-jinja2==1.2.0
     # via -r requirements.in
 aiohttp-session[secure]==2.9.0
     # via -r requirements.in
-aiohttp==3.6.2
+aiohttp==3.7.4
     # via
     #   -r requirements.in
     #   aiohttp-devtools
@@ -54,6 +54,8 @@ python-decouple==3.3
     # via -r requirements.in
 six==1.14.0
     # via cryptography
+typing-extensions==3.7.4.3
+    # via aiohttp
 watchgod==0.5
     # via aiohttp-devtools
 yarl==1.4.2
