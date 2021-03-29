@@ -48,7 +48,7 @@ multidict==4.7.4
     #   yarl
 pycparser==2.19
     # via cffi
-pygments==2.5.2
+pygments==2.7.4
     # via aiohttp-devtools
 python-decouple==3.3
     # via -r requirements.in
