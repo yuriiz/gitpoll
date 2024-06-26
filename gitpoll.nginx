@@ -1,5 +1,11 @@
 server {
 	listen 80;
+	server_name gitpoll.io;
+	return 301 http://www.gitpoll.io$request_uri;
+}
+
+server {
+	listen 80;
 	client_max_body_size 4G;
 
 	server_name www.gitpoll.io;
