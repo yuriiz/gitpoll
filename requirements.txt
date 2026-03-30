@@ -66,7 +66,7 @@ propcache==0.2.0
     #   yarl
 pycparser==2.21
     # via cffi
-pygments==2.15.0
+pygments==2.20.0
     # via aiohttp-devtools
 python-decouple==3.7
     # via -r requirements.in
